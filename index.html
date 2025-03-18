@@ -1,6 +1,6 @@
 import pandas as pd
 
-# 創建課程表數據（使用修正後的完整內容）
+# 創建課程表數據
 data = {
     "上課日期": [
         "114/03/17(星期一)", "114/03/17(星期一)", "114/03/17(星期一)", "114/03/17(星期一)",
@@ -35,7 +35,9 @@ data = {
 df = pd.DataFrame(data)
 
 # 生成 HTML 內容
-html_content = """
+# 使用列表來儲存 HTML 片段，避免字串拼接時的換行問題
+html_content = [
+    """
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
@@ -106,7 +108,6 @@ html_content = """
         tr:hover {
             background-color: #e8f4f8;
         }
-        /* iPhone 適配 */
         @media (max-width: 768px) {
             table {
                 display: block;
@@ -150,20 +151,25 @@ html_content = """
                 </tr>
             </thead>
             <tbody>
-"""
+    """
+]
 
 # 添加表格數據
 for _, row in df.iterrows():
-    html_content += f"""
+    html_content.append(
+        f"""
                 <tr>
                     <td>{row["上課日期"]}</td>
                     <td>{row["授課時間"]}</td>
                     <td>{row["時數"]}</td>
                     <td>{row["課程進度/內容"]}</td>
                 </tr>
-    """
+        """
+    )
 
-html_content += """
+# 添加結尾部分
+html_content.append(
+    """
             </tbody>
         </table>
     </div>
@@ -180,7 +186,7 @@ html_content += """
                 rows = table.rows;
 
                 for (i = 1; i < (rows.length - 1); i++) {
-                    shouldzewSwitch = false;
+                    shouldSwitch = false;
                     const x = rows[i].getElementsByTagName("TD")[column];
                     const y = rows[i + 1].getElementsByTagName("TD")[column];
 
@@ -236,11 +242,14 @@ html_content += """
     </script>
 </body>
 </html>
-"""
+    """
+)
 
-# 將 HTML 內容寫入文件
-file_path = "course_schedule_iphone_optimized.html"
+# 將 HTML 內容合併並寫入文件
+html_content_final = "".join(html_content)
+
+file_path = "course_schedule_iphone_optimized_clean.html"
 with open(file_path, "w", encoding="utf-8") as file:
-    file.write(html_content)
+    file.write(html_content_final)
 
-print(f"iPhone 優化後的 HTML 文件已生成: {file_path}")
+print(f"修正後的 HTML 文件已生成: {file_path}")
