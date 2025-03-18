@@ -1,56 +1,246 @@
-上課日期
-114/03/17(星期一)
-114/03/17(星期一)
-114/03/17(星期一)
-114/03/17(星期一)
-114/03/18(星期二)
-114/03/18(星期二)
-114/03/18(星期二)
-114/03/19(星期三)
-114/03/19(星期三)
-114/03/19(星期三)
-114/03/19(星期三)
-114/03/20(星期四)
-114/03/20(星期四)
-授课时间
-08:30~11:30
-11:30~12:30
-13:30~15:30
-15:30~17:30
-08:30~11:30
-11:30~12:30
-13:30~17:30
-08:30~11:30
-11:30~12:30
-13:30~15:30
-15:30~17:30
-09:00~12:00
-13:00~17:00
-时数
-3
-2
-2
-3
-4
-3
-1
-2
-2
-3
-4
-課程進度/内容
-租賃住宅市場發展及管理條例/相關實務案例分享及法規解析
-建築物設備管理維護實務/建築物設備管理維護要點解析
-建築物設備管理維護實務/建築物設備管理維護要點解析
-室内裝修相關法規/室内裝修規範及糾紛案例分享
-公寓大厦管理相關法規/相關實務案例分享
-式住宅租賃契約與委託管理契約應記載(約定)及不得記載(約定)事
-契約書撰寫技巧
-式住宅租賃契約與委託管理契約應記載(約定)及不得記載(約定)
-書糾紛案例分享
-屋況設備點交及故障排除實務/屋況設備點交要點及設備故障排除實務分享
-租賃關係管理及糾紛處理/租賃關係管理實務分享
-租賃關係管理及糾紛處理/租賃關係管理實務分享
-專業倫理規範/職業道德與倫理
-消費者保護法相關法規/消費糾紛案例分享
-不動產租賃及租稅相關法規/不動租賃稅費實務分享
+import pandas as pd
+
+# 創建課程表數據（使用修正後的完整內容）
+data = {
+    "上課日期": [
+        "114/03/17(星期一)", "114/03/17(星期一)", "114/03/17(星期一)", "114/03/17(星期一)",
+        "114/03/18(星期二)", "114/03/18(星期二)", "114/03/18(星期二)",
+        "114/03/19(星期三)", "114/03/19(星期三)", "114/03/19(星期三)", "114/03/19(星期三)",
+        "114/03/20(星期四)", "114/03/20(星期四)"
+    ],
+    "授課時間": [
+        "08:30~11:30", "11:30~12:30", "13:30~15:30", "15:30~17:30",
+        "08:30~11:30", "11:30~12:30", "13:30~17:30",
+        "08:30~11:30", "11:30~12:30", "13:30~15:30", "15:30~17:30",
+        "09:00~12:00", "13:00~17:00"
+    ],
+    "時數": [3, 1, 2, 2, 3, 1, 4, 3, 1, 2, 2, 3, 4],
+    "課程進度/內容": [
+        "租賃住宅市場發展及管理條例/相關實務案例分享及法規解析",
+        "建築物設備管理維護實務/建築物設備管理維護要點解析",
+        "建築物設備管理維護實務/建築物設備管理維護要點解析",
+        "室內裝修相關法規/室內裝修規範及糾紛案例分享",
+        "公寓大廈管理相關法規/相關實務案例分享",
+        "各式住宅租賃契約與委託管理契約應記載(約定)及不得記載(約定)事項/契約書撰寫技巧",
+        "各式住宅租賃契約與委託管理契約應記載(約定)及不得記載(約定)事項/契約糾紛案例分享",
+        "屋況設備點交及故障排除實務/屋況設備點交要點及設備故障排除實務分享",
+        "租賃關係管理及糾紛處理/租賃關係管理實務分享",
+        "租賃關係管理及糾紛處理/租賃關係管理實務分享",
+        "專業倫理規範/職業道德與倫理",
+        "消費者保護法相關法規/消費糾紛案例分享",
+        "不動產租賃及租稅相關法規/不動產租賃稅費實務分享"
+    ]
+}
+
+df = pd.DataFrame(data)
+
+# 生成 HTML 內容
+html_content = """
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>課程表</title>
+    <style>
+        body {
+            font-family: 'Noto Sans TC', Arial, sans-serif;
+            margin: 0;
+            padding: 10px;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.4;
+        }
+        .container {
+            max-width: 100%;
+            margin: 0;
+            padding: 0 10px;
+        }
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        .filter {
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .filter label {
+            margin-right: 10px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        .filter select {
+            padding: 5px;
+            font-size: 0.9em;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 60%;
+            max-width: 200px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+            font-size: 0.9em;
+        }
+        th, td {
+            border: 1px solid #e0e0e0;
+            padding: 8px;
+            text-align: left;
+            word-wrap: break-word;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+            cursor: pointer;
+            font-size: 0.95em;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #e8f4f8;
+        }
+        /* iPhone 適配 */
+        @media (max-width: 768px) {
+            table {
+                display: block;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            th, td {
+                min-width: 100px;
+                font-size: 0.8em;
+                padding: 6px;
+            }
+            .filter select {
+                width: 80%;
+            }
+            h2 {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>課程表</h2>
+        <div class="filter">
+            <label for="date-filter">篩選日期：</label>
+            <select id="date-filter" onchange="filterTable()">
+                <option value="">全部</option>
+                <option value="114/03/17(星期一)">114/03/17(星期一)</option>
+                <option value="114/03/18(星期二)">114/03/18(星期二)</option>
+                <option value="114/03/19(星期三)">114/03/19(星期三)</option>
+                <option value="114/03/20(星期四)">114/03/20(星期四)</option>
+            </select>
+        </div>
+        <table id="course-table">
+            <thead>
+                <tr>
+                    <th onclick="sortTable(0)">上課日期</th>
+                    <th onclick="sortTable(1)">授課時間</th>
+                    <th onclick="sortTable(2)">時數</th>
+                    <th onclick="sortTable(3)">課程進度/內容</th>
+                </tr>
+            </thead>
+            <tbody>
+"""
+
+# 添加表格數據
+for _, row in df.iterrows():
+    html_content += f"""
+                <tr>
+                    <td>{row["上課日期"]}</td>
+                    <td>{row["授課時間"]}</td>
+                    <td>{row["時數"]}</td>
+                    <td>{row["課程進度/內容"]}</td>
+                </tr>
+    """
+
+html_content += """
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // 表格排序功能
+        function sortTable(column) {
+            const table = document.getElementById("course-table");
+            let rows, switching = true;
+            let i, shouldSwitch, dir = "asc", switchCount = 0;
+
+            while (switching) {
+                switching = false;
+                rows = table.rows;
+
+                for (i = 1; i < (rows.length - 1); i++) {
+                    shouldzewSwitch = false;
+                    const x = rows[i].getElementsByTagName("TD")[column];
+                    const y = rows[i + 1].getElementsByTagName("TD")[column];
+
+                    let xValue = x.innerHTML.toLowerCase();
+                    let yValue = y.innerHTML.toLowerCase();
+
+                    if (column === 2) {
+                        xValue = parseFloat(xValue);
+                        yValue = parseFloat(yValue);
+                    }
+
+                    if (dir === "asc") {
+                        if (xValue > yValue) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    } else if (dir === "desc") {
+                        if (xValue < yValue) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                    switchCount++;
+                } else {
+                    if (switchCount === 0 && dir === "asc") {
+                        dir = "desc";
+                        switching = true;
+                    }
+                }
+            }
+        }
+
+        // 篩選功能
+        function filterTable() {
+            const filter = document.getElementById("date-filter").value;
+            const table = document.getElementById("course-table");
+            const rows = table.getElementsByTagName("TR");
+
+            for (let i = 1; i < rows.length; i++) {
+                const date = rows[i].getElementsByTagName("TD")[0].innerHTML;
+                if (filter === "" || date === filter) {
+                    rows[i].style.display = "";
+                } else {
+                    rows[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
+"""
+
+# 將 HTML 內容寫入文件
+file_path = "course_schedule_iphone_optimized.html"
+with open(file_path, "w", encoding="utf-8") as file:
+    file.write(html_content)
+
+print(f"iPhone 優化後的 HTML 文件已生成: {file_path}")
